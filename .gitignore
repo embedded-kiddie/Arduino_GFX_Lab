@@ -1,0 +1,19 @@
+# ignore all files and directories
+/*
+
+# allow list
+!.gitignore
+!README.md
+
+!ColorAlignment
+!PDQgraphicstest
+
+
+# VSCODE
+*/.theia
+*/.vscode
+
+# Mac special files
+*/.DS_store
+*/._*
+
