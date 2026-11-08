@@ -25,9 +25,9 @@
 // Graphic library configuration
 // 93410 and 77890 are for 8-bit parallel MCUFRIEND-type LCDs.
 //-------------------------------------------------------------------------------------
-#define USE_ADAFRUIT    false // Select library: true or false
+#define USE_ADAFRUIT    false // Select library: true (Adafruit GFX) or false (Arduino GFX)
 #define USE_TFT_DRIVER  9341  // Select Driver : 9341[0], 7789[0], 9486, 7796
-#define USE_OPERATION   2     // Init operation: type 1 (default) or 2 (variant) for 9341[0] and 7789[0]
+#define USE_OPERATION   2     // Init operation: type 1 (default) or 2 for 9341[0], 7789[0]
 
 #include "gfx_config.hpp"
 
@@ -37,14 +37,6 @@
 
 // Include the jpeg decoder library
 #include <TJpg_Decoder.h>
-
-#ifndef RGB565
-#define RGB565(r, g, b) ((((r) & 0xF8) << 8) | (((g) & 0xFC) << 3) | ((b) >> 3))
-#endif
-
-#define TFT_BLACK     0x0000
-#define TFT_WHITE     0xFFFF
-#define TFT_ORANGE    RGB565(233,  109,  73)
 
 //-------------------------------------------------------------------------------------
 // Callback function to draw image block for Tiny JPEG Decompressor

@@ -53,12 +53,11 @@ void gfx_setup(void) {
 // Graphic library configuration
 // 93410 and 77890 are for 8-bit parallel MCUFRIEND-type LCDs.
 //-------------------------------------------------------------------------------------
-#define USE_ADAFRUIT    false // Select library: true or false
+#define USE_ADAFRUIT    false // Select library: true (Adafruit GFX) or false (Arduino GFX)
 #define USE_TFT_DRIVER  9341  // Select Driver : 9341[0], 7789[0], 9486, 7796
-#define USE_OPERATION   2     // Init operation: type 1 (default) or 2 (variant) for 9341[0] and 7789[0]
+#define USE_OPERATION   2     // Init operation: type 1 (default) or 2 for 9341[0], 7789[0]
 
 #include "gfx_config.hpp"
-#include "colors.h"
 #endif
 
 #ifdef ESP32
@@ -174,12 +173,12 @@ void loop(void) {
   GFX(setCursor(0, 0));
 
   GFX(setTextSize(tsa));
-  GFX(setTextColor(RGB565_MAGENTA));
+  GFX(setTextColor(TFT_MAGENTA));
   GFX(println(F(GFX_NAME " PDQ")));
 
   if (h > w) {
     GFX(setTextSize(tsb));
-    GFX(setTextColor(RGB565_LIME));
+    GFX(setTextColor(TFT_LIME));
     GFX(print(F("\nBenchmark ")));
     GFX(setTextSize(tsc));
     if (ds == 12) {
@@ -206,7 +205,7 @@ void loop(void) {
 
   if ((h > w) || (h > 240)) {
     GFX(setTextSize(tsc));
-    GFX(setTextColor(RGB565_LIME));
+    GFX(setTextColor(TFT_LIME));
     GFX(print(F("\nBenchmark Complete!")));
   }
 
@@ -234,7 +233,7 @@ void serialOut(const __FlashStringHelper *item, int32_t v, uint32_t d, bool clea
   }
   delay(d);
   if (clear) {
-    GFX(fillScreen(RGB565_BLACK));
+    GFX(fillScreen(TFT_BLACK));
   }
 }
 
@@ -245,11 +244,11 @@ void printnice(const __FlashStringHelper *item, long int v)
 #endif
 {
   GFX(setTextSize(tsb));
-  GFX(setTextColor(RGB565_CYAN));
+  GFX(setTextColor(TFT_CYAN));
   GFX(print(item));
 
   GFX(setTextSize(tsc));
-  GFX(setTextColor(RGB565_YELLOW));
+  GFX(setTextColor(TFT_YELLOW));
   if (v < 0) {
     GFX(println(F("        N/A")));
   } else {
@@ -274,11 +273,11 @@ void printnice(const __FlashStringHelper *item, long int v)
 int32_t testFillScreen() {
   uint32_t start = micros_start();
   // Shortened this tedious test!
-  GFX(fillScreen(RGB565_WHITE));
-  GFX(fillScreen(RGB565_RED));
-  GFX(fillScreen(RGB565_LIME));
-  GFX(fillScreen(RGB565_BLUE));
-  GFX(fillScreen(RGB565_BLACK));
+  GFX(fillScreen(TFT_WHITE));
+  GFX(fillScreen(TFT_RED));
+  GFX(fillScreen(TFT_LIME));
+  GFX(fillScreen(TFT_BLUE));
+  GFX(fillScreen(TFT_BLACK));
 
   return micros() - start;
 }
@@ -288,7 +287,7 @@ int32_t testText() {
   GFX(setCursor(0, 0));
 
   GFX(setTextSize(1));
-  GFX(setTextColor(RGB565_WHITE, RGB565_BLACK));
+  GFX(setTextColor(TFT_WHITE, TFT_BLACK));
   GFX(println(F("Hello World!")));
 
   GFX(setTextSize(2));
@@ -300,71 +299,71 @@ int32_t testText() {
   GFX(println(F("BLUE")));
 
   GFX(setTextSize(tsa));
-  GFX(setTextColor(RGB565_YELLOW));
+  GFX(setTextColor(TFT_YELLOW));
   GFX(println(1234.56));
 
-  GFX(setTextColor(RGB565_WHITE));
+  GFX(setTextColor(TFT_WHITE));
   GFX(println((w > 128) ? 0xDEADBEEF : 0xDEADBEE, HEX));
 
-  GFX(setTextColor(RGB565_CYAN, RGB565_WHITE));
+  GFX(setTextColor(TFT_CYAN, TFT_WHITE));
   GFX(println(F("Groop,")));
 
   GFX(setTextSize(tsc));
-  GFX(setTextColor(RGB565_MAGENTA, RGB565_WHITE));
+  GFX(setTextColor(TFT_MAGENTA, TFT_WHITE));
   GFX(println(F("I implore thee,")));
 
   GFX(setTextSize(1));
-  GFX(setTextColor(RGB565_NAVY, RGB565_WHITE));
+  GFX(setTextColor(TFT_NAVY, TFT_WHITE));
   GFX(println(F("my foonting turlingdromes.")));
 
-  GFX(setTextColor(RGB565_DARKGREEN, RGB565_WHITE));
+  GFX(setTextColor(TFT_DARKGREEN, TFT_WHITE));
   GFX(println(F("And hooptiously drangle me")));
 
-  GFX(setTextColor(RGB565_DARKCYAN, RGB565_WHITE));
+  GFX(setTextColor(TFT_DARKCYAN, TFT_WHITE));
   GFX(println(F("with crinkly bindlewurdles,")));
 
-  GFX(setTextColor(RGB565_MAROON, RGB565_WHITE));
+  GFX(setTextColor(TFT_MAROON, TFT_WHITE));
   GFX(println(F("Or I will rend thee")));
 
-  GFX(setTextColor(RGB565_PURPLE, RGB565_WHITE));
+  GFX(setTextColor(TFT_PURPLE, TFT_WHITE));
   GFX(println(F("in the gobberwartsb")));
 
-  GFX(setTextColor(RGB565_OLIVE, RGB565_WHITE));
+  GFX(setTextColor(TFT_OLIVE, TFT_WHITE));
   GFX(println(F("with my blurglecruncheon,")));
 
-  GFX(setTextColor(RGB565_DARKGREY, RGB565_WHITE));
+  GFX(setTextColor(TFT_DARKGREY, TFT_WHITE));
   GFX(println(F("see if I don't!")));
 
   GFX(setTextSize(2));
-  GFX(setTextColor(RGB565_RED));
+  GFX(setTextColor(TFT_RED));
   GFX(println(F("Size 2")));
 
   GFX(setTextSize(3));
-  GFX(setTextColor(RGB565_ORANGE));
+  GFX(setTextColor(TFT_ORANGE));
   GFX(println(F("Size 3")));
 
   GFX(setTextSize(4));
-  GFX(setTextColor(RGB565_YELLOW));
+  GFX(setTextColor(TFT_YELLOW));
   GFX(println(F("Size 4")));
 
   GFX(setTextSize(5));
-  GFX(setTextColor(RGB565_GREENYELLOW));
+  GFX(setTextColor(TFT_GREENYELLOW));
   GFX(println(F("Size 5")));
 
   GFX(setTextSize(6));
-  GFX(setTextColor(RGB565_LIME));
+  GFX(setTextColor(TFT_LIME));
   GFX(println(F("Size 6")));
 
   GFX(setTextSize(7));
-  GFX(setTextColor(RGB565_BLUE));
+  GFX(setTextColor(TFT_BLUE));
   GFX(println(F("Size 7")));
 
   GFX(setTextSize(8));
-  GFX(setTextColor(RGB565_PURPLE));
+  GFX(setTextColor(TFT_PURPLE));
   GFX(println(F("Size 8")));
 
   GFX(setTextSize(9));
-  GFX(setTextColor(RGB565_LIGHTPINK));
+  GFX(setTextColor(TFT_LIGHTPINK));
   GFX(println(F("Size 9")));
 
   return micros() - start;
@@ -394,7 +393,7 @@ int32_t testLines() {
   x1 = y1 = 0;
   y2 = h - 1;
   for (x2 = 0; x2 < w; x2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -402,7 +401,7 @@ int32_t testLines() {
 
   x2 = w - 1;
   for (y2 = 0; y2 < h; y2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -412,7 +411,7 @@ int32_t testLines() {
   y1 = 0;
   y2 = h - 1;
   for (x2 = 0; x2 < w; x2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -420,7 +419,7 @@ int32_t testLines() {
 
   x2 = 0;
   for (y2 = 0; y2 < h; y2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -430,7 +429,7 @@ int32_t testLines() {
   y1 = h - 1;
   y2 = 0;
   for (x2 = 0; x2 < w; x2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -438,7 +437,7 @@ int32_t testLines() {
 
   x2 = w - 1;
   for (y2 = 0; y2 < h; y2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -448,7 +447,7 @@ int32_t testLines() {
   y1 = h - 1;
   y2 = 0;
   for (x2 = 0; x2 < w; x2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -456,7 +455,7 @@ int32_t testLines() {
 
   x2 = 0;
   for (y2 = 0; y2 < h; y2 += 6) {
-    GFX(drawLine(x1, y1, x2, y2, RGB565_BLUE));
+    GFX(drawLine(x1, y1, x2, y2, TFT_BLUE));
   }
 #ifdef ESP8266
   yield(); // avoid long run triggered ESP8266 WDT restart
@@ -472,10 +471,10 @@ int32_t testFastLines() {
   start = micros_start();
 
   for (y = 0; y < h; y += 5) {
-    GFX(drawFastHLine(0, y, w, RGB565_RED));
+    GFX(drawFastHLine(0, y, w, TFT_RED));
   }
   for (x = 0; x < w; x += 5) {
-    GFX(drawFastVLine(x, 0, h, RGB565_BLUE));
+    GFX(drawFastVLine(x, 0, h, TFT_BLUE));
   }
 
   return micros() - start;
@@ -503,7 +502,7 @@ int32_t testRects() {
   start = micros_start();
   for (i = 2; i < n; i += 6) {
     i2 = i / 2;
-    GFX(drawRect(cx - i2, cy - i2, i, i, RGB565_LIME));
+    GFX(drawRect(cx - i2, cy - i2, i, i, TFT_LIME));
   }
 
   return micros() - start;
@@ -517,7 +516,7 @@ int32_t testFilledCircles(uint8_t radius) {
 
   for (x = radius; x < w; x += r2) {
     for (y = radius; y < h; y += r2) {
-      GFX(fillCircle(x, y, radius, RGB565_MAGENTA));
+      GFX(fillCircle(x, y, radius, TFT_MAGENTA));
     }
   }
 
@@ -536,7 +535,7 @@ int32_t testCircles(uint8_t radius) {
 
   for (x = 0; x < w1; x += r2) {
     for (y = 0; y < h1; y += r2) {
-      GFX(drawCircle(x, y, radius, RGB565_WHITE));
+      GFX(drawCircle(x, y, radius, TFT_WHITE));
     }
   }
 
@@ -549,7 +548,7 @@ int32_t testFillArcs() {
   uint32_t start = micros_start();
 
   for (i = 6; i < cn; i += 6) {
-    GFX(fillArc(cx1, cy1, i, i - 3, 0, i * r, RGB565_RED));
+    GFX(fillArc(cx1, cy1, i, i - 3, 0, i * r, TFT_RED));
   }
 
   return micros() - start;
@@ -564,7 +563,7 @@ int32_t testArcs() {
   uint32_t start = micros_start();
 
   for (i = 6; i < cn; i += 6) {
-    GFX(drawArc(cx1, cy1, i, i - 3, 0, i * r, RGB565_WHITE));
+    GFX(drawArc(cx1, cy1, i, i - 3, 0, i * r, TFT_WHITE));
   }
 
   return micros() - start;
