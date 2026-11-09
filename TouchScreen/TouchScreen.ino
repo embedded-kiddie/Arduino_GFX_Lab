@@ -39,7 +39,7 @@
 //-------------------------------------------------------------------------------------
 // Offset for the box and the size of the pen tip used for plotting in `loop()`
 //-------------------------------------------------------------------------------------
-#define BOX_OFFSET      50
+#define BOX_OFFSET      30
 #define PLOT_SIZE       5
 
 //-------------------------------------------------------------------------------------
@@ -54,7 +54,6 @@ XPT2046_TouchCalibrate ts(TOUCH_CS, TOUCH_IRQ);
 // marker_pos: top-left(0), top-right(1), bottom-left(2), bottom-right(3)
 //-------------------------------------------------------------------------------------
 void drawMarker(uint16_t X, uint16_t Y, uint8_t marker_pos, uint16_t color) {
-  GFX(startWrite());
   GFX(setTextSize(2)); // Font: 12(w) x 16(h)
   GFX(setCursor((GFX(width()) - 192) / 2, (GFX(height()) - 16) / 2));
   GFX(print(F("Touch the corner"))); // Text: 192(w) x 16(h)
@@ -64,7 +63,6 @@ void drawMarker(uint16_t X, uint16_t Y, uint8_t marker_pos, uint16_t color) {
 
   GFX(fillRect(X - MARKER_WIDTH  * dx, Y - MARKER_HEIGHT * dy, MARKER_WIDTH,  MARKER_HEIGHT, color));
   GFX(fillRect(X - MARKER_HEIGHT * dx, Y - MARKER_WIDTH  * dy, MARKER_HEIGHT, MARKER_WIDTH,  color));
-  GFX(endWrite());
 }
 
 void setup() {
@@ -125,11 +123,9 @@ void loop(void) {
     redraw = false;
     uint16_t W = GFX(width());
     uint16_t H = GFX(height());
-    GFX(startWrite());
     GFX(drawRect(BOX_OFFSET-1, BOX_OFFSET-1, W - (BOX_OFFSET-1)*2, H - (BOX_OFFSET-1)*2, TFT_RED));
     GFX(drawRect(BOX_OFFSET,   BOX_OFFSET,   W - (BOX_OFFSET  )*2, H - (BOX_OFFSET  )*2, TFT_RED));
     GFX(drawRect(BOX_OFFSET+1, BOX_OFFSET+1, W - (BOX_OFFSET+1)*2, H - (BOX_OFFSET+1)*2, TFT_RED));
-    GFX(endWrite());
   }
 
   else if (Serial.available()) {

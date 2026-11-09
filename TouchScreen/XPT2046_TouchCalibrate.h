@@ -54,9 +54,9 @@ extern "C" {
 //-------------------------------------------------------------------------------------
 #define XTC_FILTER_DT     ((float)XTC_SAMPLE_PERIOD / 1000.0f)  // Sampling period [sec]
 #define XTC_FILTER_TAU    0.01f   // Time constant for approaching the final value [sec]
-#define XTC_CALIB_THRESH  10      // Threshold ​​for raw and filtered data for calibration
-#define XTC_TOUCH_THRESH  400     // Threshold ​​for raw and filtered data for getTouch()
-#define XTC_TOUCH_LIMIT   30      // Sampling time limit for getTouch() [msec]
+#define XTC_CALIB_THRESH  10      // Threshold for raw and filtered data for calibration
+#define XTC_TOUCH_THRESH  400     // Threshold for raw and filtered data for getTouch()
+#define XTC_TOUCH_LIMIT   50      // Sampling time limit for getTouch() [msec]
 
 class XTC_Filter {
 private:
