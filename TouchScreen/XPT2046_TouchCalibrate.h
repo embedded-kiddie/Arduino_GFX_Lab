@@ -95,7 +95,7 @@ public:
   bool getTouch(uint16_t *x, uint16_t *y, uint16_t *z = nullptr) {
     int n = 0;
     XTC_Filter fx, fy;
-    while (calibrated && touched() && ++n < XTC_TOUCH_LIMIT) {
+    while (calibrated && touched() && ++n <= XTC_TOUCH_LIMIT) {
       auto p = XPT2046_Touchscreen::getPoint();
       if (p.z > z_threshold &&
           abs((int)p.x - (int)roundf(fx.filter(p.x))) < XTC_TOUCH_THRESH &&

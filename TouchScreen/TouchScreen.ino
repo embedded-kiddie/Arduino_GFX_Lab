@@ -81,7 +81,7 @@ void setup() {
   static SPIClass touch_spi(VSPI); // HSPI is assigned for LCD in "gfx_config.h"
   touch_spi.begin(TOUCH_SCLK, TOUCH_MISO, TOUCH_MOSI, TOUCH_CS);
   ts.begin(GFX(width()), GFX(height()), touch_spi);
-  ts.setRotation(TOUCH_ROTATION);
+  ts.setRotation((TFT_ROTATION + 2) & 3);
 #endif
 
 #if   true
