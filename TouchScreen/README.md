@@ -1,7 +1,7 @@
 # 4-points calibration using affine transformation matrix
 
 ## Overview
-- [4-points calibration using affine transformation matrix](wiki/4%E2%80%90points-calibration-using-affine-transformation-matrix)
+- [4-points calibration using affine transformation matrix](https://github.com/embedded-kiddie/Arduino_GFX_Lab/wiki/4%E2%80%90points-calibration-using-affine-transformation-matrix)
 
 ## Description
 
