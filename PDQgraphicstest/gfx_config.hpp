@@ -66,13 +66,17 @@
 #define TFT_ROTATION  0
 #endif
 
+//-------------------------------------------------------------------------------------
+// Use `GFX(width())` and `GFX(height())` to get the width and height
+// corresponding to the `TFT ROTATION`.
+//-------------------------------------------------------------------------------------
 #ifndef TFT_WIDTH
   #if (USE_TFT_DRIVER == 9486) || (USE_TFT_DRIVER == 7796)
-    #define TFT_WIDTH     (TFT_ROTATION & 1 ? 480 : 320)
-    #define TFT_HEIGHT    (TFT_ROTATION & 1 ? 320 : 480)
+    #define TFT_WIDTH     320
+    #define TFT_HEIGHT    480
   #else
-    #define TFT_WIDTH     (TFT_ROTATION & 1 ? 320 : 240)
-    #define TFT_HEIGHT    (TFT_ROTATION & 1 ? 240 : 320)
+    #define TFT_WIDTH     240
+    #define TFT_HEIGHT    320
   #endif
 #endif
 
